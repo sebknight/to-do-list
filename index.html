@@ -5,64 +5,96 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <title>To Do List</title>
     <style>
-      .container {
-        margin-top: 3em;
-        border: 3px solid grey;
-        border-radius: 1em;
-        /* margin-left: 30%; */
-        /* background: grey; */
-      }
-      h1 {
-        text-align: center;
-        margin: 0.5em;
-      }
+    body {
+    background: #355C7D;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(left, #C06C84, #6C5B7B, #355C7D);
+    background: -o-linear-gradient(left, #C06C84, #6C5B7B, #355C7D);
+    background: linear-gradient(to right, #C06C84, #6C5B7B, #355C7D);  /* Chrome 10-25, Safari 5.1-6 */ /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+    #container {
+      margin: 2em;
+      padding: 0em 2em 0em 2em;
+      border: 3px solid white;
+      border-radius: 1em;
+      text-align: center;
+      justify-content: center;
+
+    }
+
+    h1 {
+      margin: 0.5em 0em 0.5em 0em;
+      color: white;
+    }
+
+    #add-task-form {
+      margin-bottom: 1em;
+      display: inline-block;
+    }
+
+    #task-list {
+      margin-bottom: 2em;
+      display: inline-block;
+    }
+
+    .complete {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
 
     </style>
   </head>
   <body>
+    <!-- <input id="input" placeholder="I need to...">
+    <ul id="list"></ul> -->
     <!-- container begins -->
-    <div class="container">
-      <h1>To Do List</h1>
+    <div id="container">
       <!-- form begins -->
-      <!-- Task added begins -->
-      <div class="task-added">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <input type="checkbox" aria-label="Checkbox for following text input">
-            </div>
-          </div>
-          <input type="text" class="form-control" aria-label="Text input with checkbox">
-          <div class="input-group-append">
-            <button class="btn btn-danger" type="button">Delete</button>
-          </div>
-        </div>
-      </div>
-      <!-- task added ENDS -->
-        <!-- Add task input begins -->
-        <div class="add-task">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="I need to..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-success" type="button">Add</button>
-            </div>
-          </div>
-        </div>
-        <!-- add task input ENDS -->
+      <h1>To Do List</h1>
+        <form>
+         <div id="add-task-form" class="form-inline">
+           <input type="text" id="input" class="form-control"  aria-describedby="textInput" placeholder="I need to...">
+         <button id="button" type="button" class="btn btn-success">Add task</button>
+         </div>
       <!-- form ENDS -->
+       </form>
+       <!-- task list begins -->
+       <div id="task-list">
+         <ul class="list-group">
+         </ul>
+    <!-- task list ENDS -->
+       </div>
     <!-- container ENDS -->
-    </div>
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-      <script>
-      (function() {
-        $(".btn btn-success").click (function() {
-          console.log('test');
-        });
+   </div>
 
-      }());
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script>
+    (function() { //IIFE
+      // DOM queries
+        var item = document.getElementById("input").value; //list item input
+        var ul = document.getElementById("task-list"); //task list container
+        var li = document.createElement('li'); //list item created dynamically
+        var button = document.getElementById("button") //add item button
 
-      </script>
+        // event listeners
+        // add task on button click
+        button.addEventListener('click', function(){ //create new list item
+          li.className = "list-group-item";
+          li.appendChild(document.createTextNode(input.value));
+          ul.appendChild(li);
+          console.log('clicked');
+        }, false);
+
+        // check task complete on item click
+        li.onclick = function(){
+          console.log('toggle task completion');
+          li.classList.toggle('complete');
+        }
+
+  }());
+    </script>
+
   </body>
 </html>
