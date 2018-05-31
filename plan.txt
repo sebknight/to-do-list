@@ -1,3 +1,0 @@
-when user opens page
-    load script
-        
