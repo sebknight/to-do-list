@@ -75,25 +75,19 @@
       // DOM queries
         var item = document.getElementById("input").value; //list item input
         var ul = document.getElementById("task-list"); //task list container
-        var li = document.createElement('li'); //list item created dynamically
         var button = document.getElementById("button") //add item button
-
-        // event listeners
-        // add task on button click
-        button.addEventListener('click', function(){ //create new list item
-          li.className = "list-group-item";
-          li.appendChild(document.createTextNode(input.value));
-          ul.appendChild(li);
-          console.log('clicked');
-        }, false);
-
-        // check task complete on item click
-        li.onclick = function(){
+      //Event listener
+        button.addEventListener('click', function(){
+          var li = document.createElement('li'); //create new task
+          li.className = "list-group-item"; //list item created and assigned class
+          li.textContent = input.value; //get task content
+          ul.appendChild(li); //attach task to list
+          li.onclick = function() {
           console.log('toggle task completion');
-          li.classList.toggle('complete');
-        }
-
-  }());
+          li.classList.toggle('complete'); //change task to complete
+         }
+        }, false);
+    }()); //IIFE ENDS
     </script>
 
   </body>
