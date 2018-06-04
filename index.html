@@ -37,9 +37,8 @@
       display: inline-block;
     }
 
-    .complete {
+    .list-group-item-success {
       text-decoration: line-through;
-      opacity: 0.5;
     }
 
     </style>
@@ -84,7 +83,7 @@
           ul.appendChild(li); //attach task to list
           li.onclick = function() {
           console.log('toggle task completion');
-          li.classList.toggle('complete'); //change task to complete
+          li.classList.toggle("list-group-item-success"); //change task to complete
          }
         }, false);
     }()); //IIFE ENDS
